@@ -122,3 +122,118 @@ class Calculator():
         self.frame.rowconfigure(2, weight=1)
         self.frame.rowconfigure(3, weight=1)
         self.frame.rowconfigure(4, weight=1)
+ def zero(self):
+        # Display number '0'
+        self.text_value.set('0')
+        self.register[self.pointer] = 0
+
+    def one(self):
+        # Display number '1'
+        self.text_value.set('1')
+        self.register[self.pointer] = 1
+
+    def two(self):
+        # Display number '2'
+        self.text_value.set('2')
+        self.register[self.pointer] = 2
+
+    def three(self):
+        # Display number '3'
+        self.text_value.set('3')
+        self.register[self.pointer] = 3
+
+    def four(self):
+        # Display number '4'
+        self.text_value.set('4')
+        self.register[self.pointer] = 4
+
+    def five(self):
+        # Display number '5'
+        self.text_value.set('5')
+        self.register[self.pointer] = 5
+
+    def six(self):
+        # Display number '6'
+        self.text_value.set('6')
+        self.register[self.pointer] = 6
+
+    def seven(self):
+        # Display number '7'
+        self.text_value.set('7')
+        self.register[self.pointer] = 7
+
+    def eight(self):
+        # Display number '8'
+        self.text_value.set('8')
+        self.register[self.pointer] = 8
+
+    def nine(self):
+        # Display number '9'
+        self.text_value.set('9')
+        self.register[self.pointer] = 9
+
+    def clear(self):
+        """
+        Clears The "LCD" screen by setting it to zero.
+        Also resets calculator's memory.
+        """
+        self.text_value.set('0')
+        self.register[0] = None
+        self.register[1] = None
+        self.pointer = 0
+
+        # Reset all operations
+        for key in self.flag:
+            self.flag[key] = False
+    def add(self):
+        """
+        Saves the number currently displayed on the screen into
+        the calculator's memory (register).
+
+        The pointer for the register is then incremented to tell
+        the calculator to expect another operand.
+        """
+
+        self.flag['add'] = True
+        # Increment the pointer so next number can be
+        # saved in memory
+        # pointer can only be 0 or 1 [0,1]
+        self.pointer = (self.pointer + 1) % 2
+
+    def subtract(self):
+        """
+        Saves the number currently displayed on the screen into
+        the calculator's memory (register).
+
+        The pointer for the register is the incremented to tell
+        the calculator to expect another operand.
+        """
+        self.flag['subtract'] = True
+        # Increment pointer so next number may
+        # be saved into memory
+        self.pointer = (self.pointer + 1) % 2
+    
+
+    def multiply(self):
+        """
+        Saves the number currently displayed on the screen into
+        the calculator's memory (register).
+
+        The pointer for the register is the incremented to tell
+        the calculator to expect another operand.
+        """
+        self.flag['multiply'] = True
+        # Increment pointer so next number may
+        # be saved into memory
+        self.pointer = (self.pointer + 1) % 2
+
+    def divide(self):
+        """
+        Saves the number currently displayed on the screen into
+        the calculator's memory (register).
+
+        The pointer for the register is the incremented to tell
+        the calculator to expect another operand.
+        """
+        self.flag['divide'] = True
+        self.pointer = (self.pointer + 1) % 2
