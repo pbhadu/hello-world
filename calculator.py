@@ -237,3 +237,61 @@ class Calculator():
         """
         self.flag['divide'] = True
         self.pointer = (self.pointer + 1) % 2
+        
+    def equals(self):
+        """
+        Takes the operand saved in register with operand
+        displayed on screen. Uses operator selected by User.
+
+        Also handles the special case of DivisionByZero
+        """
+        if self.flag['add']:
+            sum = self.register[0] + self.register[1]
+            self.text_value.set(sum)
+
+            # Reset Flags, pointers, memory, etc...
+            self.flag['add'] = False
+            self.pointer = 0
+            # For adding multiple numbers together easily
+            # (Chaining operations together)
+            self.register[0] = sum
+
+        if self.flag['subtract']:
+            difference = self.register[0] - self.register[1]
+            self.text_value.set(difference)
+
+            # Reset Flags, pointers, memory, etc...
+            self.flag['subtract'] = False
+            self.pointer = 0
+            # For chaining operations together
+            self.register[0] = difference
+
+        if self.flag['multiply']:
+            product = self.register[0] * self.register[1]
+            self.text_value.set(product)
+
+            # Reset Flags, pointers, memory, etc...
+            self.flag['multiply'] = False
+            self.pointer = 0
+            # For chaining operations together
+            self.register[0] = product
+
+        if self.flag['divide']:
+            # Catch DivisionByZero Exception
+            # Dividing by zero results in 'ERROR' printing to the "LCD"
+            try:
+                quotient = self.register[0] / self.register[1]
+            except ZeroDivisionError:
+                quotient = 'ERROR'
+
+            self.text_value.set(quotient)
+
+            # Reset Flags, pointers, memory, etc...
+            self.flag['divide'] = False
+            self.pointer = 0
+            # For chaining operations together
+            self.register[0] = quotient
+
+
+# Creates and runs the calculator application.
+startCalculator = Calculator()
